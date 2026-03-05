@@ -18,8 +18,6 @@ services:
       SCRAPER_DETAIL_CONCURRENCY: ${SCRAPER_DETAIL_CONCURRENCY:-4}
       SCRAPER_HTTP_TIMEOUT: ${SCRAPER_HTTP_TIMEOUT:-30}
       FRAGMENT_API_URL_OVERRIDE: /api?hash=154cf86e790e33579b
-    ports:
-      - "8020:8020"
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8020/healthz')"]
       interval: 15s
