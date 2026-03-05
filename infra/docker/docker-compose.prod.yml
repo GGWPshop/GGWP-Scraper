@@ -17,7 +17,7 @@ services:
       SCRAPER_MAX_GIFTS: ${SCRAPER_MAX_GIFTS:-120}
       SCRAPER_DETAIL_CONCURRENCY: ${SCRAPER_DETAIL_CONCURRENCY:-4}
       SCRAPER_HTTP_TIMEOUT: ${SCRAPER_HTTP_TIMEOUT:-30}
-      FRAGMENT_API_URL_OVERRIDE: ${FRAGMENT_API_URL_OVERRIDE:-/api?hash=b1a0a4e6289edaf4f4}
+      FRAGMENT_API_URL_OVERRIDE: ${FRAGMENT_API_URL_OVERRIDE:-/api?hash=49c497a78836599f14}
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8020/healthz')"]
       interval: 15s
