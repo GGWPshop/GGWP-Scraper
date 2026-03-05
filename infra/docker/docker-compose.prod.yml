@@ -8,7 +8,7 @@ services:
     env_file:
       - ../../.env
     environment:
-      APP_BASE_URL: ${APP_BASE_URL:-http://ggwp-gifts-api:8000}
+      APP_BASE_URL: ${APP_BASE_URL:-http://ggwp-api:8000}
       INTERNAL_API_TOKEN: ${INTERNAL_API_TOKEN}
       FRAGMENT_SCRAPER_ENABLED: ${FRAGMENT_SCRAPER_ENABLED:-true}
       SCRAPER_SCHEDULE_CRON: ${SCRAPER_SCHEDULE_CRON:-0 * * * *}
@@ -25,5 +25,12 @@ services:
       interval: 15s
       timeout: 5s
       retries: 5
+    networks:
+      - ggwp-internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
-volumes: {}
+networks:
+  ggwp-internal:
+    name: ggwp-internal
+    external: true
