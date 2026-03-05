@@ -97,7 +97,31 @@ class FragmentClient:
             raise last_exc
         raise RuntimeError('Unexpected retry flow')
 
+    async def _reset_client(self) -> None:
+        """Recreate HTTP client to clear accumulated session state and cookies."""
+        try:
+            await self._client.aclose()
+        except Exception:
+            pass
+        self._client = httpx.AsyncClient(
+            timeout=self.timeout,
+            follow_redirects=True,
+            headers={
+                'User-Agent': random.choice(_USER_AGENTS),
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'DNT': '1',
+                'Sec-Fetch-Dest': 'document',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Site': 'none',
+            },
+        )
+        self._request_count = 0
+
     async def _init_session(self, page_path: str = '/gifts?sort=listed&filter=sale') -> tuple[str, dict[str, str], str]:
+        # Fresh client clears cookies/session from previous runs to avoid Fragment IP blocking
+        await self._reset_client()
         gifts_url = f'{self.base_url}{page_path}'
         response = await self._request_with_retry('GET', gifts_url)
         html = response.text
