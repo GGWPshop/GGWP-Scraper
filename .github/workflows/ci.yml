@@ -34,6 +34,10 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
+            mkdir -p /opt/ggwp-scraper
+            if [ ! -d /opt/ggwp-scraper/.git ]; then
+              git clone https://github.com/GGWPshop/GGWP-Scraper.git /opt/ggwp-scraper
+            fi
             cd /opt/ggwp-scraper
             git pull origin main
             docker network create ggwp-internal || true
