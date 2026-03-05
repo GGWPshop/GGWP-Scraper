@@ -9,7 +9,7 @@ services:
       - ../../.env
     environment:
       APP_BASE_URL: ${APP_BASE_URL:-http://ggwp-gifts-api:8000}
-      INTERNAL_API_TOKEN: ${INTERNAL_API_TOKEN}
+      INTERNAL_API_TOKEN: ${INTERNAL_API_TOKEN:-dev-internal-token}
       FRAGMENT_SCRAPER_ENABLED: ${FRAGMENT_SCRAPER_ENABLED:-true}
       SCRAPER_SCHEDULE_CRON: ${SCRAPER_SCHEDULE_CRON:-0 * * * *}
       FRAGMENT_BASE_URL: ${FRAGMENT_BASE_URL:-https://fragment.com}
@@ -17,7 +17,7 @@ services:
       SCRAPER_MAX_GIFTS: ${SCRAPER_MAX_GIFTS:-120}
       SCRAPER_DETAIL_CONCURRENCY: ${SCRAPER_DETAIL_CONCURRENCY:-4}
       SCRAPER_HTTP_TIMEOUT: ${SCRAPER_HTTP_TIMEOUT:-30}
-      FRAGMENT_API_URL_OVERRIDE: /api?hash=154cf86e790e33579b
+      FRAGMENT_API_URL_OVERRIDE: ${FRAGMENT_API_URL_OVERRIDE:-/api?hash=b1a0a4e6289edaf4f4}
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8020/healthz')"]
       interval: 15s
