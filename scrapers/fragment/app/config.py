@@ -11,8 +11,8 @@ class Settings(BaseSettings):
     # Override skips HTML-based apiUrl hash extraction.
     # Fragment returns different HTML to server IPs (no JS apiUrl pattern).
     # Update this hash when Fragment deploys new JS (check fragment.com/gifts page source).
-    # Last verified: 2026-03-05 — hash 154cf86e790e33579b
-    fragment_api_url_override: str | None = '/api?hash=154cf86e790e33579b'
+    # Last verified: 2026-03-05 — hash b1a0a4e6289edaf4f4
+    fragment_api_url_override: str | None = '/api?hash=b1a0a4e6289edaf4f4'
 
     scraper_max_pages: int = 0
     scraper_max_gifts: int = 0
